@@ -94,3 +94,147 @@ python main.py --engine mysql \
 - Push results into a search index (e.g., Elasticsearch) instead of a flat JSON file
 - Add incremental scanning so only schema changes are re-collected
 - Wrap the scanner as a packaged CLI binary for easy distribution to client environments
+
+- ## クイックデモ(データベース不要)
+
+```bash
+pip install -r requirements.txt
+python demo.py
+```
+
+サンプルのSQLiteデータベース(`demo.db`)を作成し、自動でスキャンして、検出したスキーマを `metadata_output.json` に書き出します。
+
+## 実際のデータベースに対して使う場合
+
+```bash
+python main.py --engine postgres \
+    --host localhost --port 5432 \
+    --dbname mydb --user myuser --password mypass \
+    --output metadata_output.json
+```
+
+```bash
+python main.py --engine mysql \
+    --host localhost --port 3306 \
+    --dbname mydb --user myuser --password mypass \
+    --output metadata_output.json
+```
+
+## 出力例
+
+```json
+{
+  "source": "sqlite",
+  "scanned_at": "2026-06-30T12:00:00",
+  "tables": [
+    {
+      "schema": "main",
+      "name": "customers",
+      "columns": [
+        {"name": "id", "type": "INTEGER", "nullable": false, "primary_key": true},
+        {"name": "name", "type": "TEXT", "nullable": true, "primary_key": false},
+        {"name": "email", "type": "TEXT", "nullable": true, "primary_key": false}
+      ],
+      "foreign_keys": []
+    }
+  ]
+}
+```
+
+## クイックデモ(データベース不要)
+
+```bash
+pip install -r requirements.txt
+python demo.py
+```
+
+サンプルのSQLiteデータベース(`demo.db`)を作成し、自動でスキャンして、検出したスキーマを `metadata_output.json` に書き出します。
+
+## 実際のデータベースに対して使う場合
+
+```bash
+python main.py --engine postgres \
+    --host localhost --port 5432 \
+    --dbname mydb --user myuser --password mypass \
+    --output metadata_output.json
+```
+
+```bash
+python main.py --engine mysql \
+    --host localhost --port 3306 \
+    --dbname mydb --user myuser --password mypass \
+    --output metadata_output.json
+```
+
+## 出力例
+
+```json
+{
+  "source": "sqlite",
+  "scanned_at": "2026-06-30T12:00:00",
+  "tables": [
+    {
+      "schema": "main",
+      "name": "customers",
+      "columns": [
+        {"name": "id", "type": "INTEGER", "nullable": false, "primary_key": true},
+        {"name": "name", "type": "TEXT", "nullable": true, "primary_key": false},
+        {"name": "email", "type": "TEXT", "nullable": true, "primary_key": false}
+      ],
+      "foreign_keys": []
+    }
+  ]
+}
+```
+## クイックデモ(データベース不要)
+
+```bash
+pip install -r requirements.txt
+python demo.py
+```
+
+サンプルのSQLiteデータベース(`demo.db`)を作成し、自動でスキャンして、検出したスキーマを `metadata_output.json` に書き出します。
+
+## 実際のデータベースに対して使う場合
+
+```bash
+python main.py --engine postgres \
+    --host localhost --port 5432 \
+    --dbname mydb --user myuser --password mypass \
+    --output metadata_output.json
+```
+
+```bash
+python main.py --engine mysql \
+    --host localhost --port 3306 \
+    --dbname mydb --user myuser --password mypass \
+    --output metadata_output.json
+```
+
+## 出力例
+
+```json
+{
+  "source": "sqlite",
+  "scanned_at": "2026-06-30T12:00:00",
+  "tables": [
+    {
+      "schema": "main",
+      "name": "customers",
+      "columns": [
+        {"name": "id", "type": "INTEGER", "nullable": false, "primary_key": true},
+        {"name": "name", "type": "TEXT", "nullable": true, "primary_key": false},
+        {"name": "email", "type": "TEXT", "nullable": true, "primary_key": false}
+      ],
+      "foreign_keys": []
+    }
+  ]
+}
+```
+
+## 今後の改善案
+
+- Snowflake / BigQuery など、クラウドデータウェアハウス向けスキャナの追加
+- 結果をフラットなJSONではなく、Elasticsearch等の検索インデックスに直接投入できるようにする
+- スキーマの差分のみを検出する増分スキャン機能の追加
+- クライアント環境への配布を容易にするため、CLIをパッケージ化したバイナリとして提供
