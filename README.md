@@ -1,4 +1,5 @@
 markdown# DB Metadata Scanner
+<img width="1015" height="807" alt="image" src="https://github.com/user-attachments/assets/8ba6618e-f2b4-414a-b4be-821487d34e80" />
 
 A lightweight Python tool that connects to a relational database (PostgreSQL or MySQL)
 and automatically collects metadata about its schema — tables, columns, data types,
